@@ -6,22 +6,22 @@ export const UserRegisterController = async (req, res) => {
   try {
     const { name, Password, email, Phone, Department, RollNo } = req.body;
     if (!name) {
-      return res.send({ message: "Name is required" });
+      return res.status(404).send({ message: "Name is required" });
     }
     if (!Password) {
-      return res.send({ message: "Password is required" });
+      return res.status(404).send({ message: "Password is required" });
     }
     if (!email) {
-      return res.send({ message: "Email is required" });
+      return res.status(404).send({ message: "Email is required" });
     }
     if (!Phone) {
-      return res.send({ message: "Phone number is required" });
+      return res.status(404).send({ message: "Phone number is required" });
     }
     if (!RollNo) {
-      return res.send({ message: "RollNo is required" });
+      return res.status(404).send({ message: "RollNo is required" });
     }
     if (!Department) {
-      return res.send({ message: "Department is required" });
+      return res.status(404).send({ message: "Department is required" });
     }
 
     const existinguser = await UserModel.findOne({ email });
