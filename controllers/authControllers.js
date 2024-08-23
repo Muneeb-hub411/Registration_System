@@ -136,27 +136,27 @@ export const UserLoginController = async (req, res) => {
 export const AdminLoginController = async (req, res) => {
   try {
     const { email, Password } = req.body;
-    const admin = await AdminModel.findOne({ email });
-    if (!admin) {
+    const user = await AdminModel.findOne({ email });
+    if (!user) {
       return res.status(404).send({
         success: false,
         message: "Admin doesnt exist",
       });
     }
-    const passcheck = await comparePass(Password, admin.Password);
+    const passcheck = await comparePass(Password, user.Password);
     if (!passcheck) {
       return res.status(404).send({
         success: false,
         message: "Email or Password is incorrect",
       });
     }
-    const token = jwt.sign({ _id: admin._id }, process.env.JWT_KEY, {
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY, {
       expiresIn: "1h",
     });
     return res.status(200).send({
       success: true,
       message: "Login Successfully",
-      admin,
+      user,
       token,
     });
   } catch (error) {
