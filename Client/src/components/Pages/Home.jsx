@@ -1,11 +1,12 @@
 import { useAuth } from "../Context/AuthContext";
+import Navbar from "./../Navbar";
+
 const Home = () => {
   const [auth, setAuth] = useAuth();
   return (
-    <div>
-      <h1>Home</h1>
-      <pre>{JSON.stringify(auth)}</pre>
-    </div>
+    <>
+      <Navbar />
+    </>
   );
 };
 
