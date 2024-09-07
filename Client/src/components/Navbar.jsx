@@ -17,14 +17,11 @@ const Navbar = () => {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
   const Nav = [
-    { id: 1, link: "Home" },
-    { id: 2, link: "About" },
-    { id: 3, link: auth.user.Status ? "Registered" : "Register now" },
-
-    { id: 4, link: "Contact" },
+    { id: 1, link: "About" },
+    { id: 2, link: auth.user.Status ? "Registered" : "Register now" },
   ];
   return (
-    <div className="w-full bg-custom-gradient h-20 text-white flex items-center justify-between fixed">
+    <div className="w-full bg-custom-gradient h-20 text-white flex items-center justify-between ">
       <div>
         <CDropdown>
           <CDropdownToggle style={{ fontSize: "1.5rem", color: "white" }}>
@@ -48,7 +45,7 @@ const Navbar = () => {
             key={id}
             className="p-4 text-2xl font-DM cursor-pointer  hover:scale-105 transition-transform duration-200"
           >
-            <Link to={link} smooth duration={500}>
+            <Link to={link} smooth duration={300}>
               {link}
             </Link>
           </li>

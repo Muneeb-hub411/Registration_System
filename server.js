@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { connectdb } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(morgan("dev"));
 connectdb();
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/student", studentRoutes);
 
 app.get("/", (req, res) => {
   try {

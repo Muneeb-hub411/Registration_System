@@ -1,11 +1,13 @@
-import { useAuth } from "../Context/AuthContext";
 import Navbar from "./../Navbar";
+import About from "./About";
+import StudentRegistration from "./StudentRegistration";
 
 const Home = () => {
-  const [auth, setAuth] = useAuth();
   return (
     <>
       <Navbar />
+      <About />
+      <StudentRegistration />
     </>
   );
 };
