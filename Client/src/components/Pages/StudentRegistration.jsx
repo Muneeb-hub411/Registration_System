@@ -1,26 +1,53 @@
 import { useState } from "react";
+import axios from "axios";
+
+import { toast } from "react-toastify";
 
 const StudentRegistration = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    department: "",
-    challan: null,
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [department, setDepartment] = useState("");
+  const [challan, setChallan] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleDepartmentChange = (e) => {
+    setDepartment(e.target.value);
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, challan: e.target.files[0] });
+    setChallan(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add logic here to handle form submission
-    console.log(formData);
+    try {
+      const formdata = new FormData();
+      formdata.append("name", name);
+      formdata.append("email", email);
+      formdata.append("department", department);
+      formdata.append("challan", challan);
+      const res = await axios.post(
+        "/api/v1/student/register-student",
+        formdata
+      );
+      if (res?.data.success) {
+        toast.success("Form Submitted");
+      } else {
+        toast.error("Error in submission");
+      }
+
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
   };
 
   return (
@@ -40,9 +67,8 @@ const StudentRegistration = () => {
             <input
               type="text"
               id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
+              value={name}
+              onChange={handleNameChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
@@ -54,9 +80,8 @@ const StudentRegistration = () => {
             <input
               type="email"
               id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={handleEmailChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded"
             />
@@ -67,9 +92,8 @@ const StudentRegistration = () => {
             </label>
             <select
               id="department"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
+              value={department}
+              onChange={handleDepartmentChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded"
             >
@@ -94,6 +118,7 @@ const StudentRegistration = () => {
               type="file"
               id="challan"
               name="challan"
+              accept="image/*"
               onChange={handleFileChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded"

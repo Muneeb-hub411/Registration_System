@@ -11,14 +11,14 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Department: {
+  department: {
     type: String,
     required: true,
   },
 
-  Challan: {
-    data: Buffer,
-    contentType: String,
+  challan: {
+    type: String,
+    required: true,
   },
 });
 export default mongoose.model("student", StudentSchema);
