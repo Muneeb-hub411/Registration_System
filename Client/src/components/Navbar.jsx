@@ -16,6 +16,7 @@ const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+
   const Nav = [
     { id: 1, link: "About" },
     { id: 2, link: auth.user.Status ? "Registered" : "Register now" },
@@ -40,16 +41,18 @@ const Navbar = () => {
         </CDropdown>
       </div>
       <ul className="sm:flex hidden ">
-        {Nav.map(({ id, link }) => (
-          <li
-            key={id}
-            className="p-4 text-2xl font-DM cursor-pointer  hover:scale-105 transition-transform duration-200"
-          >
-            <Link to={link} smooth duration={300}>
-              {link}
-            </Link>
-          </li>
-        ))}
+        {auth.user.role == 0
+          ? Nav.map(({ id, link }) => (
+              <li
+                key={id}
+                className="p-4 text-2xl font-DM cursor-pointer  hover:scale-105 transition-transform duration-200"
+              >
+                <Link to={link} smooth duration={300}>
+                  {link}
+                </Link>
+              </li>
+            ))
+          : null}
       </ul>
       <div
         className="sm:hidden z-10 cursor-pointer pr-4  "

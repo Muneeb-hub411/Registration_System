@@ -9,7 +9,7 @@ export const studentRegisterController = async (req, res) => {
       name,
       email,
       department,
-      challan: challan.path,
+      challan: challan.filename,
     }).save();
     return res.status(200).send({
       success: true,

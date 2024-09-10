@@ -116,7 +116,7 @@ export const UserLoginController = async (req, res) => {
       });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY, {
-      expiresIn: "1h",
+      expiresIn: "1d",
     });
     return res.status(200).send({
       success: true,
@@ -151,7 +151,7 @@ export const AdminLoginController = async (req, res) => {
       });
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY, {
-      expiresIn: "1h",
+      expiresIn: "7d",
     });
     return res.status(200).send({
       success: true,
